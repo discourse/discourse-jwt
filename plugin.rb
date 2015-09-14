@@ -5,7 +5,7 @@
 
 require_dependency 'auth/oauth2_authenticator'
 
-gem "omniauth-jwt", "0.0.2", require: false
+gem "discourse-omniauth-jwt", "0.0.2", require: false
 
 require 'omniauth/jwt'
 
