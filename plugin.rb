@@ -18,7 +18,6 @@ class JWTAuthenticator < ::Auth::OAuth2Authenticator
   end
 
   def after_authenticate(auth)
-    raise auth.inspect
     result = Auth::Result.new
 
     uid = auth[:uid]
