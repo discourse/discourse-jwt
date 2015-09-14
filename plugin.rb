@@ -26,8 +26,6 @@ class JWTAuthenticator < ::Auth::OAuth2Authenticator
     result.email = auth[:info].email
     result.email_valid = true
 
-    raise result.inspect
-
     current_info = ::PluginStore.get("jwt", "jwt_user_#{uid}")
     if current_info
       result.user = User.where(id: current_info[:user_id]).first
