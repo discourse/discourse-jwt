@@ -20,7 +20,7 @@ class JWTAuthenticator < ::Auth::OAuth2Authenticator
   def after_authenticate(auth)
     result = Auth::Result.new
 
-    uid = auth[:uid]
+    uid = auth[:info].id
     result.name = auth[:info].name
     result.username = uid
     result.email = auth[:info].email
