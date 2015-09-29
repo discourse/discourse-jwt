@@ -13,6 +13,8 @@ class JWTAuthenticator < ::Auth::OAuth2Authenticator
   def register_middleware(omniauth)
     omniauth.provider :jwt,
                       :name => 'jwt',
+                      :uid_claim => 'id',
+                      :required_claims => ['id', 'email', 'name'],
                       :secret => GlobalSetting.jwt_secret,
                       :auth_url => GlobalSetting.jwt_auth_url
   end
@@ -20,7 +22,7 @@ class JWTAuthenticator < ::Auth::OAuth2Authenticator
   def after_authenticate(auth)
     result = Auth::Result.new
 
-    uid = auth[:info].id
+    uid = auth[:uid]
     result.name = auth[:info].name
     result.username = uid
     result.email = auth[:info].email
