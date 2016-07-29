@@ -1,0 +1,7 @@
+en:
+  site_settings:
+    jwt_enabled: 'JWT authentication is enabled'
+    jwt_auth_url: 'JWT auth URL'
+    jwt_secret: 'JWT shared secret'
+    jwt_button_title: 'Button title for JWT login'
+    jwt_email_verified: 'Check if the JWT provider has verified the email'

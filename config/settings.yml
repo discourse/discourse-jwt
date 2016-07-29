@@ -1,0 +1,10 @@
+login:
+  jwt_enabled:
+    default: false
+    client: true
+  jwt_auth_url: ''
+  jwt_secret: ''
+  jwt_button_title:
+    default: 'with JWT'
+    client: true
+  jwt_email_verified: false
