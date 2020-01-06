@@ -7,7 +7,7 @@ A Discourse Plugin to enable authentication via JSON Web Tokens (JWT)
 Add the following settings to your `discourse.conf` file:
 
 - `jwt_secret`
-- `auth_url`
+- `jwt_auth_url`
 
 ### License
 
