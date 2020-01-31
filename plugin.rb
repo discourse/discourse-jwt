@@ -18,7 +18,7 @@ class JWTAuthenticator < ::Auth::OAuth2Authenticator
                       required_claims: ['id', 'email', 'name'],
                       setup: lambda { |env|
                         opts = env['omniauth.strategy'].options
-                        opts[:secret] = SiteSetting.jwt_secret,
+                        opts[:secret] = SiteSetting.jwt_secret
                         opts[:auth_url] = SiteSetting.jwt_auth_url
                       }
   end
