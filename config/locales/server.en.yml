@@ -1,0 +1,5 @@
+en:
+  site_settings:
+    jwt_enabled: Enable JWT authentication. Customize user interface text <a href='%{base_path}/admin/customize/site_texts?q=js.login.jwt'>here</a>
+    jwt_secret: JWT Secret
+    jwt_auth_url: URL which users will be redirected to for authentication

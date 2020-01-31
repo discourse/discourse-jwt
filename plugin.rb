@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # name: discourse-jwt
 # about: JSON Web Tokens Auth Provider
 # version: 0.1
@@ -12,11 +13,20 @@ require 'omniauth/jwt'
 class JWTAuthenticator < ::Auth::OAuth2Authenticator
   def register_middleware(omniauth)
     omniauth.provider :jwt,
-                      :name => 'jwt',
-                      :uid_claim => 'id',
-                      :required_claims => ['id', 'email', 'name'],
-                      :secret => GlobalSetting.jwt_secret,
-                      :auth_url => GlobalSetting.jwt_auth_url
+                      name: 'jwt',
+                      uid_claim: 'id',
+                      required_claims: ['id', 'email', 'name'],
+                      setup: lambda { |env|
+                        opts = env['omniauth.strategy'].options
+                        opts[:secret] = SiteSetting.jwt_secret,
+                        opts[:auth_url] = SiteSetting.jwt_auth_url
+                      }
+  end
+
+  def enabled?
+    # Check the global setting for backwards-compatibility.
+    # When this plugin used only global settings, there was no separate enable setting
+    SiteSetting.jwt_enabled || GlobalSetting.try(:jwt_auth_url)
   end
 
   def after_authenticate(auth)
@@ -37,17 +47,9 @@ class JWTAuthenticator < ::Auth::OAuth2Authenticator
   end
 
   def after_create_account(user, auth)
-    ::PluginStore.set("jwt", "jwt_user_#{auth[:extra_data][:jwt_user_id]}", {user_id: user.id })
+    ::PluginStore.set("jwt", "jwt_user_#{auth[:extra_data][:jwt_user_id]}", user_id: user.id)
   end
 
 end
 
-title = GlobalSetting.try(:jwt_title) || "JWT"
-button_title = GlobalSetting.try(:jwt_title) || "with JWT"
-
-auth_provider :title => button_title,
-              :authenticator => JWTAuthenticator.new('jwt'),
-              :message => "Authorizing with #{title} (make sure pop up blockers are not enabled)",
-              :frame_width => 600,
-              :frame_height => 380,
-              :background_color => '#003366'
+auth_provider authenticator: JWTAuthenticator.new('jwt')

@@ -1,0 +1,7 @@
+en:
+  js:
+    login:
+      jwt:
+        name: "JWT"
+        title: "with JWT"
+        message: "Authenticating with JWT"
