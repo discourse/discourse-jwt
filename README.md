@@ -1,6 +1,8 @@
 ### discourse-jwt
 
-A Discourse Plugin to enable authentication via JSON Web Tokens (JWT)
+A Discourse Plugin to enable authentication via JSON Web Tokens (JWT).
+
+In the first instance, consider using Discourse's [OpenID Connect](https://meta.discourse.org/t/openid-connect-authentication-plugin/103632) or [OAuth2](https://meta.discourse.org/t/oauth2-basic-support/33879) plugins. These authentication standards are more mature, and include more security features.
 
 ### Configuration
 
