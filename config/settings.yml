@@ -2,4 +2,3 @@ plugins:
   jwt_enabled: false
   jwt_secret: ""
   jwt_auth_url: ""
-  jwt_jwks_url: ""
