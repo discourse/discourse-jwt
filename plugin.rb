@@ -6,23 +6,24 @@
 
 gem "discourse-omniauth-jwt", "0.0.2", require: false
 
-require 'omniauth/jwt'
+require "omniauth/jwt"
 
 class JWTAuthenticator < Auth::ManagedAuthenticator
   def name
-    'jwt'
+    "jwt"
   end
 
   def register_middleware(omniauth)
     omniauth.provider :jwt,
-                      name: 'jwt',
-                      uid_claim: 'id',
-                      required_claims: ['id', 'email', 'name'],
-                      setup: lambda { |env|
-                        opts = env['omniauth.strategy'].options
-                        opts[:secret] = SiteSetting.jwt_secret
-                        opts[:auth_url] = SiteSetting.jwt_auth_url
-                      }
+                      name: "jwt",
+                      uid_claim: "id",
+                      required_claims: %w[id email name],
+                      setup:
+                        lambda { |env|
+                          opts = env["omniauth.strategy"].options
+                          opts[:secret] = SiteSetting.jwt_secret
+                          opts[:auth_url] = SiteSetting.jwt_auth_url
+                        }
   end
 
   def enabled?
