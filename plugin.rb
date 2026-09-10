@@ -4,9 +4,7 @@
 # version: 0.1
 # author: Robin Ward
 
-gem "omniauth-jwt2", "0.1.0", require: false
-
-require "omniauth/jwt"
+require_relative "lib/omniauth/strategies/jwt"
 
 class JWTAuthenticator < Auth::ManagedAuthenticator
   def name
@@ -14,7 +12,7 @@ class JWTAuthenticator < Auth::ManagedAuthenticator
   end
 
   def register_middleware(omniauth)
-    omniauth.provider :jwt,
+    omniauth.provider OmniAuth::Strategies::JWT,
                       name: "jwt",
                       uid_claim: "id",
                       required_claims: %w[id email name],
