@@ -1,4 +1,6 @@
 plugins:
-  jwt_enabled: false
+  jwt_enabled:
+    default: false
+    validator: AuthProviderCredentialsValidator
   jwt_secret: ""
   jwt_auth_url: ""

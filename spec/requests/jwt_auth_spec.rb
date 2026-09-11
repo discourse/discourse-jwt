@@ -10,9 +10,9 @@ RSpec.describe "JWT authentication" do
 
   before do
     enable_current_plugin
-    SiteSetting.jwt_enabled = true
     SiteSetting.jwt_secret = secret
     SiteSetting.jwt_auth_url = "https://sso.example.com/login"
+    SiteSetting.jwt_enabled = true
   end
 
   it "sends the user to the configured auth URL" do
