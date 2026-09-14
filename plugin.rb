@@ -24,10 +24,18 @@ class JWTAuthenticator < Auth::ManagedAuthenticator
                         }
   end
 
+  def enable_setting
+    :jwt_enabled
+  end
+
+  def required_settings
+    %i[jwt_secret jwt_auth_url]
+  end
+
   def enabled?
     # Check the global setting for backwards-compatibility.
     # When this plugin used only global settings, there was no separate enable setting
-    SiteSetting.jwt_enabled || GlobalSetting.try(:jwt_auth_url)
+    (SiteSetting.jwt_enabled || GlobalSetting.try(:jwt_auth_url).present?) && configured?
   end
 end
 
